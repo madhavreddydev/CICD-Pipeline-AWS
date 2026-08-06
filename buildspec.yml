@@ -1,0 +1,27 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo "Installing dependencies..."
+      - pip install -r requirements.txt
+      
+  build:
+    commands:
+      - echo "Running tests..."
+      - pytest tests/ --cov=app
+      - echo "Build completed successfully"
+      
+  post_build:
+    commands:
+      - echo "Preparing artifacts..."
+      - zip -r app.zip app/ requirements.txt appspec.yml scripts/
+
+artifacts:
+  files:
+    - app.zip
+  name: BuildArtifact
+
+cache:
+  paths:
+    - '/root/.cache/pip/**/*'

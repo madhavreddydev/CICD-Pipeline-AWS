@@ -1,0 +1,31 @@
+version: 0.0
+
+Resources:
+  - TargetService:
+      Type: AWS::EC2::Instance
+      Properties:
+        Name: FlaskAppInstance
+
+Hooks:
+  - BeforeInstall: "scripts/before_install.sh"
+  - AfterInstall: "scripts/after_install.sh"
+  - ApplicationStart: "scripts/application_start.sh"
+  - ApplicationStop: "scripts/application_stop.sh"
+
+Files:
+  - source: /
+    destination: /home/ec2-user/app
+
+Permissions:
+  - object: /home/ec2-user/app
+    owner: ec2-user
+    group: ec2-user
+    mode: 755
+    type:
+      - directory
+  - object: /home/ec2-user/app
+    owner: ec2-user
+    group: ec2-user
+    mode: 644
+    type:
+      - file

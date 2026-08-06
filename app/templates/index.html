@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CI/CD Pipeline Demo - AWS DevOps</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="header-content">
+                <h1>🚀 CI/CD Pipeline Demo</h1>
+                <p class="subtitle">Automated Deployment with AWS</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Status Section -->
+            <section class="card status-card">
+                <h2>Application Status</h2>
+                <div class="status-box">
+                    <div class="status-indicator" id="statusIndicator"></div>
+                    <span id="statusText">Checking...</span>
+                </div>
+                <p id="statusMessage" class="status-message"></p>
+                <button class="btn btn-primary" onclick="checkStatus()">Refresh Status</button>
+            </section>
+
+            <!-- Pipeline Info Section -->
+            <section class="card info-card">
+                <h2>Pipeline Information</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <h3>Tool: AWS CodeBuild</h3>
+                        <p>Automated build and test</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Tool: AWS CodeDeploy</h3>
+                        <p>Automated deployment</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Tool: AWS CodePipeline</h3>
+                        <p>Orchestration</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Storage: S3</h3>
+                        <p>Artifact storage</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Application Info Section -->
+            <section class="card app-info-card">
+                <h2>App Details</h2>
+                <div id="appInfo" class="app-info-box">
+                    <p>Loading...</p>
+                </div>
+                <button class="btn btn-secondary" onclick="getAppInfo()">Load App Info</button>
+            </section>
+
+            <!-- Deployment Steps Section -->
+            <section class="card steps-card">
+                <h2>Deployment Process</h2>
+                <ol class="steps-list">
+                    <li><strong>Push Code:</strong> Developer pushes to GitHub</li>
+                    <li><strong>Trigger Pipeline:</strong> Webhook triggers AWS CodePipeline</li>
+                    <li><strong>Build:</strong> CodeBuild compiles and tests</li>
+                    <li><strong>Deploy:</strong> CodeDeploy pushes to EC2</li>
+                    <li><strong>Run:</strong> Application starts on server</li>
+                </ol>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 DevOps CI/CD Demo | Powered by AWS</p>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
