@@ -252,9 +252,9 @@ This project is licensed under MIT License - see LICENSE file for details.
 
 ## 👤 Author
 
-DevOps Engineer
+D.Madhav Reddy
 
-## 📞 Support
+## 📞 +91 9392211630
 
 For issues and questions, create an issue in GitHub repository.
 
