@@ -1,30 +1,18 @@
 #!/bin/bash
 set -e
 
-echo "=== Application Start Phase ==="
-echo "Starting Flask application..."
+cd /home/ec2-user/app/app
 
-# Navigate to application directory
-cd /home/ec2-user/app
+pkill -f "python3.*app.py" || true
 
-# Get the current date and time
-TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
-echo "Application start time: $TIMESTAMP"
+nohup /home/ec2-user/app/venv/bin/python app.py > /tmp/flask_app.log 2>&1 &
 
-# Start Flask app in background
-echo "Launching Flask server on port 5000..."
-nohup python app.py > /tmp/flask_app.log 2>&1 &
+sleep 3
 
-# Wait for app to start
-sleep 2
-
-# Check if Flask is running
-if pgrep -f "python.*app.py" > /dev/null; then
+if pgrep -f "venv/bin/python.*app.py" >/dev/null; then
     echo "Flask application started successfully"
-    echo "Application is running on http://localhost:5000"
 else
-    echo "Failed to start Flask application"
+    echo "Flask application failed"
+    cat /tmp/flask_app.log
     exit 1
 fi
-
-echo "=== Application Start Phase Complete ==="

@@ -2,25 +2,22 @@
 set -e
 
 echo "=== After Install Phase ==="
-echo "Installing Python dependencies..."
 
-# Navigate to application directory
 cd /home/ec2-user/app
 
-# Upgrade pip
-echo "Upgrading pip..."
-pip install --upgrade pip
+echo "Python:"
+python3 --version
 
-# Install requirements
-echo "Installing Flask and dependencies..."
-pip install -r requirements.txt
-
-# Check if installation was successful
-if [ $? -eq 0 ]; then
-    echo "Dependencies installed successfully"
-else
-    echo "Failed to install dependencies"
-    exit 1
+echo "Installing pip if needed..."
+if ! python3 -m pip --version >/dev/null 2>&1; then
+    dnf install -y python3-pip
 fi
 
-echo "=== After Install Phase Complete ==="
+echo "Creating virtual environment..."
+rm -rf /home/ec2-user/app/venv
+python3 -m venv /home/ec2-user/app/venv
+
+echo "Installing dependencies..."
+/home/ec2-user/app/venv/bin/python -m pip install -r /home/ec2-user/app/requirements.txt
+
+echo "=== After Install Complete ==="
